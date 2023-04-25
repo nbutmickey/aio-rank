@@ -1,0 +1,74 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noEmit": true,
+      "esModuleInterop": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "jsx": "preserve",
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "./*"
+        ],
+        "@dicts/*": [
+          "src/dicts/*"
+        ],
+        "@components/*": [
+          "src/components/*"
+        ],
+        "@wiseComponents/*": [
+          "src/wiseComponents/*"
+        ],
+        "@typings/*": [
+          "src/typings/*"
+        ],
+        "@services/*": [
+          "src/services/*"
+        ],
+        "@interfaces/*": [
+          "src/interfaces/*"
+        ],
+        "@styles/*": [
+          "./styles/*"
+        ],
+        "@utils/*": [
+          "src/utils/*"
+        ],
+        "@hooks/*": [
+          "src/hooks/*"
+        ]
+      },
+      "incremental": true
+    },
+    "include": [
+      "next-env.d.ts",
+      "**/*.ts",
+      "**/*.tsx",
+      "server/app.ts",
+      "server/app.ts", 
+      "config/webpack.config.js",
+    ],
+    "exclude": [
+      "node_modules"
+    ],
+    "ts-node": {
+      "transpileOnly": true,
+      "files": true,
+      "compilerOptions": {
+        "target": "esnext",
+        "module": "commonjs"
+      }
+    }
+  }

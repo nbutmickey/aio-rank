@@ -1,0 +1,61 @@
+{
+    "keepSettings": {
+        "type": 2,
+        "amount": 10
+    },
+    "auditFilename": "audit.json",
+    "hashType": "md5",
+    "extension": "",
+    "files": [
+        {
+            "date": 1681381196623,
+            "name": "C:\\Users\\86183\\Desktop\\CS\\web\\SaaS3\\aio\\web\\logs\\aio\\aio.log.wf.2023041318.86183",
+            "hash": "659393fbbbe612b6afa9eb526873b7f7"
+        },
+        {
+            "date": 1681383602925,
+            "name": "C:\\Users\\86183\\Desktop\\CS\\web\\SaaS3\\aio\\web\\logs\\aio\\aio.log.2023041319.0",
+            "hash": "6d3a29790072257faa245ad3bed73e07"
+        },
+        {
+            "date": 1681384443210,
+            "name": "C:\\Users\\86183\\Desktop\\CS\\web\\SaaS3\\aio\\web\\logs\\aio\\aio.log.2023041319.86183",
+            "hash": "2fbc71ea15f64b8d357e882ddb1691cb"
+        },
+        {
+            "date": 1681387214437,
+            "name": "C:\\Users\\86183\\Desktop\\CS\\web\\SaaS3\\aio\\web\\logs\\aio\\aio.log.2023041320.0",
+            "hash": "55bf5bc44011f4d9867c467bac0aed50"
+        },
+        {
+            "date": 1681801707453,
+            "name": "C:\\Users\\86183\\Desktop\\CS\\web\\SaaS3\\aio\\web\\logs\\aio\\aio.log.2023041815.0",
+            "hash": "942fcbe96a73ffcd3dfef79a9931a5ee"
+        },
+        {
+            "date": 1681804807017,
+            "name": "C:\\Users\\86183\\Desktop\\CS\\web\\SaaS3\\aio\\web\\logs\\aio\\aio.log.2023041816.0",
+            "hash": "08aeada9e881159297cb4b4bb35e0830"
+        },
+        {
+            "date": 1681808457290,
+            "name": "C:\\Users\\86183\\Desktop\\CS\\web\\SaaS3\\aio\\web\\logs\\aio\\aio.log.2023041817.0",
+            "hash": "8b14af35ae2c3911b8cb4d410edeaecf"
+        },
+        {
+            "date": 1682421335879,
+            "name": "/Users/shizhongwei02/Desktop/aio-rank/logs/aio/aio.log.2023042519.0",
+            "hash": "13d96f1fb04af86a07715776b934a5c5"
+        },
+        {
+            "date": 1682421335881,
+            "name": "/Users/shizhongwei02/Desktop/aio-rank/logs/aio/aio.log.2023042519.2",
+            "hash": "70e2d37609d512b1aa76884840a2786b"
+        },
+        {
+            "date": 1682421335882,
+            "name": "/Users/shizhongwei02/Desktop/aio-rank/logs/aio/aio.log.wf.2023042519.2",
+            "hash": "54d93db05066f67c145bfd9ce8a618f0"
+        }
+    ]
+}
