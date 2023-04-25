@@ -1,7 +1,0 @@
-node_modules/*
-logs/
-output/
-dist/
-
-.env.local
-audit.json
