@@ -84,9 +84,10 @@ interface DndListProps {
     data: string[];
     setAddBlock: any;
     onClickHandler: any;
+    operationText: string;
 }
 
-const DndList: FC<DndListProps> = ({data, setAddBlock, onClickHandler}) => {
+const DndList: FC<DndListProps> = ({data, setAddBlock, onClickHandler, operationText}) => {
     const [items, setItems] = useState(data);
 
     useEffect(
@@ -99,8 +100,10 @@ const DndList: FC<DndListProps> = ({data, setAddBlock, onClickHandler}) => {
     const handleDragEnd = (event: DragEndEvent) => {
         const {active, over} = event;
         if (over && active.id !== over.id && active.id !== 'Block_1') {
-            setItems(arrayMove(items, indexOf(items, active.id), indexOf(items, over.id)));
-            setAddBlock(items);
+            if (over.id !== 'Block_1') {
+                setItems(arrayMove(items, indexOf(items, active.id), indexOf(items, over.id)));
+                setAddBlock(items);
+            }
         }
     };
 
@@ -133,7 +136,7 @@ const DndList: FC<DndListProps> = ({data, setAddBlock, onClickHandler}) => {
                 <div className="grid grid-cols-4">
                     {items.map(item => {
                         return (
-                            <Card key={item} item={item} operationText="+" onClickHandler={onClickHandler} />
+                            <Card key={item} item={item} operationText={operationText} onClickHandler={onClickHandler} />
                         );
                     })}
                 </div>
