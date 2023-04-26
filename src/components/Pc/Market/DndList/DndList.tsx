@@ -101,8 +101,8 @@ const DndList: FC<DndListProps> = ({data, setAddBlock, onClickHandler, operation
         const {active, over} = event;
         if (over && active.id !== over.id && active.id !== 'Block_1') {
             if (over.id !== 'Block_1') {
+                setAddBlock(arrayMove(items, indexOf(items, active.id), indexOf(items, over.id)));
                 setItems(arrayMove(items, indexOf(items, active.id), indexOf(items, over.id)));
-                setAddBlock(items);
             }
         }
     };
