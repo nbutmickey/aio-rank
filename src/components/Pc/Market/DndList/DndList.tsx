@@ -16,17 +16,18 @@ import {
     useSortable,
     arrayMove,
 } from '@dnd-kit/sortable';
-import {IconHome} from '@douyinfe/semi-icons';
+import {IconHome, IconPlusCircleStroked, IconMinusCircleStroked} from '@douyinfe/semi-icons';
 import {CSS} from '@dnd-kit/utilities';
 import {indexOf} from 'lodash';
 
 interface CardProps {
+    disabled: boolean;
     item: string;
     operationText: string;
     onClickHandler: any;
   }
 
-const Card: FC<CardProps> = ({item, operationText, onClickHandler}) => {
+const Card: FC<CardProps> = ({disabled, item, operationText, onClickHandler}) => {
     const {
         attributes,
         listeners,
@@ -58,11 +59,11 @@ const Card: FC<CardProps> = ({item, operationText, onClickHandler}) => {
             {...listeners}
             {...attributes}
             style={style}
-            className="mx-2"
+            className={`mx-2 ${disabled ? 'opacity-50' : ''}`}
         >
             <div
                 // eslint-disable-next-line max-len
-                className="flex md:w-full flex-row h-[3rem] px-3 m-2 bg-gray-200 hover:bg-gray-100 rounded-lg cursor-pointer justify-between"
+                className="flex md:w-full flex-row items-center h-[3rem] px-3 m-2 bg-gray-200 hover:bg-gray-100 rounded-lg cursor-pointer justify-between"
             >
                 <div className="flex flex-row">
                     <div className="self-center">
@@ -72,9 +73,15 @@ const Card: FC<CardProps> = ({item, operationText, onClickHandler}) => {
                         <div className="font-bold">{item}</div>
                     </div>
                 </div>
-                <div className="font-semibold text-lg self-center">
-                    {operationText}
-                </div>
+                {
+                    !disabled && (
+                        operationText === '+' ? (
+                            <IconPlusCircleStroked />
+                        ) : (
+                            <IconMinusCircleStroked />
+                        )
+                    )
+                }
             </div>
         </div>
     );
@@ -136,7 +143,7 @@ const DndList: FC<DndListProps> = ({data, setAddBlock, onClickHandler, operation
                 <div className="grid grid-cols-4">
                     {items.map(item => {
                         return (
-                            <Card key={item} item={item} operationText={operationText} onClickHandler={onClickHandler} />
+                            <Card key={item} disabled={item === 'Block_1'} item={item} operationText={operationText} onClickHandler={onClickHandler} />
                         );
                     })}
                 </div>

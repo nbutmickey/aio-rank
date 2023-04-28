@@ -45,7 +45,7 @@ const Index: React.FC = () => {
     return (
         <div className="flex flex-row h-screen w-screen">
             <Nav
-                className="h-full min-w-[150px] md:min-w-[19%] fixed"
+                className="h-full"
                 bodyStyle={{height: 320}}
                 onSelect={data => setNav(data.itemKey)}
             >
@@ -64,7 +64,11 @@ const Index: React.FC = () => {
                     />
                 ))}
             </Nav>
-            {renderMap[nav]}
+            <div style={{
+                width: 'calc(100vw - 240px)',
+            }}>
+                {renderMap[nav]}
+            </div>
         </div>
     );
 };

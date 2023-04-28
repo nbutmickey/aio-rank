@@ -1,4 +1,4 @@
-import {Table} from '@douyinfe/semi-ui';
+import {Table, Input} from '@douyinfe/semi-ui';
 import {ChangeEventHandler, FC, SetStateAction, useEffect, useMemo, useState} from 'react';
 import fuzzySearch from '../search';
 import styles from './index.module.less';
@@ -17,11 +17,11 @@ const InfoTable: FC<InfoTableProps> = ({title, columns, data}) => {
         []
     );
 
-    const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
-        if (e.target.value === '') {
+    const handleChange: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void = (value, e) => {
+        if (value === '') {
             setData(data); // reset
         } else {
-            setData(fuzzySearch(e.target.value, data));
+            setData(fuzzySearch(value, data));
         }
     };
 
@@ -35,10 +35,13 @@ const InfoTable: FC<InfoTableProps> = ({title, columns, data}) => {
     return (
         <div>
             <div className="w-full flex flex-row justify-between my-4 ">
-                <div className="text-xl font-[500] self-center">{title}</div>
-                <input
-                    className={styles.searchBox}
+                <div className="text-xl font-[500] self-center" style={{
+                    width: 'calc(100% - 266px)',
+                }}>{title}</div>
+                <Input
+                    className={`${styles.searchBox} shrink-0`}
                     id="search"
+                    showClear
                     placeholder="search for content"
                     onChange={handleChange}
                 />

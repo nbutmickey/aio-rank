@@ -99,11 +99,11 @@ const TabPane3 = () => {
                                     {'长按拖动板块，调整顺序（固定板块不可修改）'}
                                 </div>
                             </div>
-                            <DndList data={block} setAddBlock={setBlock} onClickHandler={handleDelete} />
+                            <DndList data={block} setAddBlock={setBlock} onClickHandler={handleDelete} operationText='-' />
                         </div>
                         <div>
                             <div className="my-6 font-bold">板块推荐</div>
-                            <DndList data={addBlock} setAddBlock={setAddBlock} onClickHandler={handleAdd} />
+                            <DndList data={addBlock} setAddBlock={setAddBlock} onClickHandler={handleAdd} operationText='+' />
                         </div>
                     </DndContext>
                 </div>

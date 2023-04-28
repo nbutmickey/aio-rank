@@ -1,7 +1,7 @@
 // TOKEN
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {Modal} from '@douyinfe/semi-ui';
-import {IconHome} from '@douyinfe/semi-icons';
+import {IconHome, IconPlus} from '@douyinfe/semi-icons';
 import {DndContext} from '@dnd-kit/core';
 import request from '@/src/utils/request';
 import API from '@/src/utils/api';
@@ -37,27 +37,36 @@ interface BlockProps {
   }
 
 export const BlockList: FC<BlockProps> = ({data, current, setCurrent, setModal}) => {
+    const scrollRef = useRef<HTMLDivElement>(null);
     return (
         <div className="flex flex-row">
-            {data.map(item => (
+            <div ref={scrollRef} className="flex-1 flex flex-row overflow-x-scroll">
+                {data.map((item, index) => (
+                    <div
+                        key={item}
+                        onClick={() => {
+                            setCurrent(item);
+                            scrollRef.current?.scrollTo({
+                                left: index * 80,
+                                behavior: 'smooth'
+                            });
+                        }}
+                        className={`
+                        rounded-3xl border-[1px] border-[#E9ECF2] px-3 py-[1px] font-normal text-[14px] mr-2 cursor-pointer h-[32px]
+                        ${current === item ? 'bg-black text-white' : ''}
+                    `}
+                    >
+                        {item}
+                    </div>
+                ))}
+            </div>
+            <div className='px-2 shrink-0'>
                 <div
-                    key={item}
-                    onClick={() => {setCurrent(item);}}
-                    className={`
-                    rounded-3xl border-[1px] border-[#E9ECF2] px-3 py-[1px] font-normal text-[14px] mr-2 cursor-pointer
-                    ${current === item ? 'bg-black text-white' : ''}
-                `}
+                    onClick={() => {setModal(true);}}
+                    className={'rounded-3xl border-[1px] border-[#E9ECF2] px-4 cursor-pointer flex items-center h-[32px]'}
                 >
-                    {item}
+                    <IconPlus />
                 </div>
-            ))}
-            <div
-                onClick={() => {setModal(true);}}
-                className={`
-                rounded-3xl border-[1px] border-[#E9ECF2] px-4 mr-2 cursor-pointer flex flex-col justify-center
-            `}
-            >
-                +
             </div>
         </div>
     );

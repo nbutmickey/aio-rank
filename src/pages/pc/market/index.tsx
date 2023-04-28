@@ -98,7 +98,7 @@ const MarketIndex = () => {
 
     return (
         <BillContext.Provider value={billType}>
-            <div className="py-7 pl-8 pr-12 h-full w-full ml-[19%]">
+            <div className="py-7 px-8 h-full w-full">
                 <Tabs
                     defaultActiveKey="1"
                     activeKey={currentKey}

@@ -49,11 +49,12 @@ export const tokenColumns = (data: Token[], setData: React.SetStateAction<Token[
             {
                 title: headerRenderer('币种', 'text-[#B4B1C1] font-[500] ml-10 text-[14px] my-[7px]'),
                 dataIndex: 'token',
-                width: '20%',
+                width: 220,
+                fixed: true,
                 render: (text: string, record: Token) => (
                     <div className="flex flex-row ml-2">
                         <div
-                            className="self-center cursor-pointer"
+                            className="shrink-0 self-center cursor-pointer"
                             onClick={() => {
                                 if (data.map(e => e.index).includes(record.index)) {
                                     setData(data.filter(e => e.index !== record.index));
@@ -69,7 +70,7 @@ export const tokenColumns = (data: Token[], setData: React.SetStateAction<Token[
                                 alt=""
                             />
                         </div>
-                        <Image src={record.icon} className="ml-4 h-[1.7rem] w-[1.7rem] self-center" />
+                        <Image src={record.icon} className="shrink-0 ml-4 h-[1.7rem] w-[1.7rem] self-center" />
                         <div className="font-[600] self-center ml-2">{text}</div>
                         <div className="text-[#656277] font-[500] text-[14px] self-center ml-2">{record.name}</div>
                     </div>
@@ -78,6 +79,7 @@ export const tokenColumns = (data: Token[], setData: React.SetStateAction<Token[
             {
                 title: headerRenderer('价格', 'text-[#B4B1C1] font-[500] text-[14px]', true),
                 dataIndex: 'price',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, 'price'),
                 render: (text: string, record: Token) => (
@@ -97,6 +99,7 @@ export const tokenColumns = (data: Token[], setData: React.SetStateAction<Token[
             {
                 title: headerRenderer('1h', 'text-[#B4B1C1] font-[500] text-[14px]'),
                 dataIndex: '1H',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, '1H'),
                 render: (text: string) => (
@@ -108,6 +111,7 @@ export const tokenColumns = (data: Token[], setData: React.SetStateAction<Token[
             {
                 title: headerRenderer('24h', 'text-[#B4B1C1] font-[500] text-[14px]'),
                 dataIndex: '24H',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, '24H'),
                 render: (text: string) => (
@@ -119,6 +123,7 @@ export const tokenColumns = (data: Token[], setData: React.SetStateAction<Token[
             {
                 title: headerRenderer('7d', 'text-[#B4B1C1] font-[500] text-[14px]'),
                 dataIndex: '7D',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, '7D'),
                 render: (text: string) => (
@@ -129,6 +134,7 @@ export const tokenColumns = (data: Token[], setData: React.SetStateAction<Token[
             {
                 title: headerRenderer('交易额', 'text-[#B4B1C1] font-[500] text-[14px]', true),
                 dataIndex: 'volume',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, 'volume'),
                 render: (text: string, record: Token) => (
@@ -148,6 +154,7 @@ export const tokenColumns = (data: Token[], setData: React.SetStateAction<Token[
             {
                 title: headerRenderer('市值', 'text-[#B4B1C1] font-[500] text-[14px]', true),
                 dataIndex: 'marketCap',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, 'marketCap'),
                 render: (text: string, record: Token) => (
@@ -191,11 +198,12 @@ export const nftColumns = (data: Token[], setData: React.SetStateAction<Token[]>
             {
                 title: headerRenderer('系列', 'text-[#B4B1C1] font-[500] text-[14px] ml-10'),
                 dataIndex: 'token',
-                width: '25%',
+                width: 300,
+                fixed: true,
                 render: (text: string, record: Token) => (
                     <div className="flex flex-row ml-2 cursor-pointer">
                         <div
-                            className="self-center cursor-pointer"
+                            className="shrink-0 self-center cursor-pointer"
                             onClick={() => {
                                 if (data.map(e => e.index).includes(record.index)) {
                                     setData(data.filter(e => e.index !== record.index));
@@ -207,11 +215,11 @@ export const nftColumns = (data: Token[], setData: React.SetStateAction<Token[]>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={data.map(e => e.index).includes(record.index) ? starSelected.src : star.src}
-                                width={15}
-                                alt=""
+                                width={16}
+                                height={16}
                             />
                         </div>
-                        <Image src={record.icon} className="ml-4 h-[1.7rem] w-[1.7rem] self-center" />
+                        <Image src={record.icon} className="shrink-0 ml-4 h-[1.7rem] w-[1.7rem] self-center" />
                         <div className="font-[600] self-center ml-2">{text}</div>
                     </div>
                 ),
@@ -219,12 +227,13 @@ export const nftColumns = (data: Token[], setData: React.SetStateAction<Token[]>
             {
                 title: headerRenderer('价格', 'text-[#B4B1C1] font-[500] text-[14px]', true),
                 dataIndex: 'price',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, 'price'),
                 render: (text: string, record: Token) => (
                     <div>
-                        <div className="flex flex-row justify-end">
-                            <Image src={record.tokenIcon} className="h-[1rem] w-[1rem] self-center" />
+                        <div className="flex flex-row items-center justify-end">
+                            <Image src={record.tokenIcon} className="h-[1rem] w-[1rem] shrink-0 self-center" />
                             <div className="font-[600] self-center ml-2">{text}</div>
                         </div>
                     </div>
@@ -233,6 +242,7 @@ export const nftColumns = (data: Token[], setData: React.SetStateAction<Token[]>
             {
                 title: headerRenderer('1h', 'text-[#B4B1C1] font-[500] text-[14px]'),
                 dataIndex: '1H',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, '1H'),
                 render: (text: string) => (
@@ -243,6 +253,7 @@ export const nftColumns = (data: Token[], setData: React.SetStateAction<Token[]>
             {
                 title: headerRenderer('24h', 'text-[#B4B1C1] font-[500] text-[14px]'),
                 dataIndex: '24H',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, '24H'),
                 render: (text: string) => (
@@ -253,6 +264,7 @@ export const nftColumns = (data: Token[], setData: React.SetStateAction<Token[]>
             {
                 title: headerRenderer('7d', 'text-[#B4B1C1] font-[500] text-[14px]'),
                 dataIndex: '7D',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, '7D'),
                 render: (text: string) => (
@@ -263,6 +275,7 @@ export const nftColumns = (data: Token[], setData: React.SetStateAction<Token[]>
             {
                 title: headerRenderer('交易额', 'text-[#B4B1C1] font-[500] text-[14px]', true),
                 dataIndex: 'volumeFM',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, 'volumeFM'),
                 render: (text: string, record: Token) => (
@@ -278,6 +291,7 @@ export const nftColumns = (data: Token[], setData: React.SetStateAction<Token[]>
             {
                 title: headerRenderer('市值', 'text-[#B4B1C1] font-[500] text-[14px]', true),
                 dataIndex: 'marketCapFM',
+                width: 200,
                 align: 'right',
                 sorter: (a: Token, b: Token) => sorter(a, b, 'marketCapFM'),
                 render: (text: string, record: Token) => (
@@ -310,7 +324,7 @@ const TabPane1 = () => {
                 setTokenData(res.list);
             });
             request({
-                url: API.MARKET_SELF_TOKEN,
+                url: API.MARKET_SELF_NFT,
                 method: 'GET',
                 params: {},
                 timeout: 5000,
