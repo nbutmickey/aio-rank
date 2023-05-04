@@ -12,10 +12,7 @@ interface InfoTableProps {
 const InfoTable: FC<InfoTableProps> = ({title, columns, data}) => {
     const [tempData, setData] = useState([]);
 
-    const scroll = useMemo(
-        () => ({y: '70vh'}),
-        []
-    );
+    const scroll = useMemo(() => ({y: '70vh', x: 'max-content'}), []);
 
     const handleChange: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void = (value, e) => {
         if (value === '') {

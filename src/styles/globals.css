@@ -77,9 +77,9 @@ button {
   display: none !important;
 }
 
-  
+
 .semi-table-body::-webkit-scrollbar{
-  display: none !important;
+  /* display: none !important; */
 }
 
 .semi-modal-wrap::-webkit-scrollbar{
