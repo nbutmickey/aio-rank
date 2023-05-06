@@ -1,9 +1,8 @@
 // NFT
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Modal} from '@douyinfe/semi-ui';
 import {DndContext} from '@dnd-kit/core';
 import API from '@/src/utils/api';
-import request from '@/src/utils/request';
 import InfoTable from '../InfoTable/InfoTable';
 import DndList from '../DndList/DndList';
 import {nftColumns} from './TabPane1';
@@ -30,9 +29,6 @@ const mockAddBlock = [
 ];
 
 const TabPane3 = () => {
-    const [NFTData, setNFTData] = useState([]);
-    const [myNFT, setMyNFT] = useState([]);
-
     const [block, setBlock] = useState(mockBlock);
     const [addBlock, setAddBlock] = useState(mockAddBlock);
     const [blockModal, setBlockModal] = useState(false);
@@ -51,36 +47,12 @@ const TabPane3 = () => {
         }
     };
 
-    useEffect(
-        () => {
-            request({
-                url: API.MARKET_NFT,
-                method: 'GET',
-                params: {},
-                timeout: 5000,
-                authorization: false,
-            }).then(res => {
-                setNFTData(res.list);
-            });
-            request({
-                url: API.MARKET_SELF_NFT,
-                method: 'GET',
-                params: {},
-                timeout: 5000,
-                authorization: false,
-            }).then(res => {
-                setMyNFT(res.list);
-            });
-        },
-        []
-    );
-
     return (
         <div>
             <InfoTable
                 title={<BlockList data={block} current={current} setCurrent={setCurrent} setModal={setBlockModal} />}
-                data={NFTData}
-                columns={nftColumns(myNFT, setMyNFT)}
+                columns={nftColumns()}
+                api={API.MARKET_NFT}
             />
             <Modal
                 style={{position: 'relative', left: '150px'}}

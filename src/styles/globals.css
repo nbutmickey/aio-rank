@@ -85,3 +85,13 @@ button {
 .semi-modal-wrap::-webkit-scrollbar{
   display: none;
 }
+
+.no-scrollbar::-webkit-scrollbar{
+  display: none !important;
+}
+
+.semi-table-wrapper .semi-spin .semi-spin-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

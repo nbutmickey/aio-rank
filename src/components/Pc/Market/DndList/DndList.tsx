@@ -63,12 +63,9 @@ const Card: FC<CardProps> = ({disabled, item, operationText, onClickHandler}) =>
         >
             <div
                 // eslint-disable-next-line max-len
-                className="flex md:w-full flex-row items-center h-[3rem] px-3 m-2 bg-gray-200 hover:bg-gray-100 rounded-lg cursor-pointer justify-between"
+                className="flex md:w-full flex-row items-center h-[32px] px-3 m-2 bg-gray-200 hover:bg-gray-100 rounded-[4px] cursor-pointer justify-between"
             >
                 <div className="flex flex-row">
-                    <div className="self-center">
-                        <IconHome size="extra-large" className="" />
-                    </div>
                     <div className="self-center ml-2">
                         <div className="font-bold">{item}</div>
                     </div>

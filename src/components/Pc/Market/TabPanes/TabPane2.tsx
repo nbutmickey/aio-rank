@@ -1,9 +1,8 @@
 // TOKEN
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
 import {Modal} from '@douyinfe/semi-ui';
-import {IconHome, IconPlus} from '@douyinfe/semi-icons';
+import {IconHome, IconPlus, IconSmallTriangleLeft, IconSmallTriangleRight} from '@douyinfe/semi-icons';
 import {DndContext} from '@dnd-kit/core';
-import request from '@/src/utils/request';
 import API from '@/src/utils/api';
 import InfoTable from '../InfoTable/InfoTable';
 import DndList from '../DndList/DndList';
@@ -38,9 +37,86 @@ interface BlockProps {
 
 export const BlockList: FC<BlockProps> = ({data, current, setCurrent, setModal}) => {
     const scrollRef = useRef<HTMLDivElement>(null);
+
+    const [onLeft, setOnLeft] = useState(true);
+    const [onRight, setOnRight] = useState(false);
+
+    const onScroll = useCallback((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        const { clientWidth, scrollWidth, scrollLeft } = e.target;
+
+        const scrW = clientWidth + scrollLeft;
+
+        if (scrW + 0.5 >= scrollWidth) {
+            setOnRight(true);
+            setOnLeft(false);
+            return;
+        }
+
+        if (scrollLeft === 0) {
+            setOnLeft(true);
+            setOnRight(false);
+            return;
+        }
+
+        setOnLeft(false);
+        setOnRight(false);
+    }, []);
+
+    const resize = useCallback(() => {
+        if (scrollRef.current === null) return;
+        const { clientWidth = 0, scrollWidth = 0, scrollLeft = 0 } = scrollRef.current ?? {};
+
+        const scrW = clientWidth + scrollLeft;
+
+        if (scrW === scrollWidth) {
+            setOnRight(true);
+            setOnLeft(true);
+            return;
+        }
+
+        if (scrW + 0.5 >= scrollWidth) {
+            setOnRight(true);
+            setOnLeft(false);
+            return;
+        }
+
+        if (scrollLeft === 0) {
+            setOnLeft(true);
+            setOnRight(false);
+            return;
+        }
+
+        setOnLeft(false);
+        setOnRight(false);
+    }, [scrollRef.current]);
+
+    useEffect(() => {
+        resize();
+
+        window.addEventListener('resize', resize)
+
+        return () => window.removeEventListener('resize', resize)
+    }, [scrollRef.current]);
+
     return (
-        <div className="flex flex-row">
-            <div ref={scrollRef} className="flex-1 flex flex-row overflow-x-scroll">
+        <div className="flex flex-row items-center">
+            <div
+                className="rounded-3xl border-[1px] border-[#E9ECF2] px-2 flex items-center justify-center h-[32px] mr-2"
+                onClick={() => {
+                    if (onLeft) return;
+                    const { scrollLeft } = scrollRef.current ?? {};
+                    scrollRef.current?.scrollTo({
+                        left: (scrollLeft ?? 0) - 80 * 2,
+                        behavior: 'smooth'
+                    });
+                }}
+            >
+                <IconSmallTriangleLeft
+                    size="extra-large"
+                    style={{ color: onLeft ? '#ccc' : '#000' }}
+                />
+            </div>
+            <div ref={scrollRef} className="flex-1 flex flex-row overflow-x-scroll no-scrollbar" onScroll={onScroll}>
                 {data.map((item, index) => (
                     <div
                         key={item}
@@ -59,6 +135,21 @@ export const BlockList: FC<BlockProps> = ({data, current, setCurrent, setModal})
                         {item}
                     </div>
                 ))}
+            </div>
+            <div
+                className="rounded-3xl border-[1px] border-[#E9ECF2] px-2 flex items-center justify-center h-[32px] ml-2"
+                onClick={() => {
+                    if (onRight) return;
+                    const { scrollLeft } = scrollRef.current ?? {};
+                    scrollRef.current?.scrollTo({
+                        left: (scrollLeft ?? 0) + 80 * 2,
+                        behavior: 'smooth'
+                    });
+                }}>
+                <IconSmallTriangleRight
+                    size="extra-large"
+                    style={{ color: onRight ? '#ccc' : '#000' }}
+                />
             </div>
             <div className='px-2 shrink-0'>
                 <div
@@ -97,9 +188,6 @@ export const Card: FC<CardProps> = ({item, operationText}) => {
 };
 
 const TabPane2 = () => {
-    const [TokenData, setTokenData] = useState([]);
-    const [myToken, setMyToken] = useState([]);
-
     const [block, setBlock] = useState(mockBlock);
     const [addBlock, setAddBlock] = useState(mockAddBlock);
     const [blockModal, setBlockModal] = useState(false);
@@ -118,36 +206,12 @@ const TabPane2 = () => {
         }
     };
 
-    useEffect(
-        () => {
-            request({
-                url: API.MARKET_TOKEN,
-                method: 'GET',
-                params: {},
-                timeout: 5000,
-                authorization: false,
-            }).then(res => {
-                setTokenData(res.list);
-            });
-            request({
-                url: API.MARKET_SELF_TOKEN,
-                method: 'GET',
-                params: {},
-                timeout: 5000,
-                authorization: false,
-            }).then(res => {
-                setMyToken(res.list);
-            });
-        },
-        []
-    );
-
     return (
         <div>
             <InfoTable
                 title={<BlockList data={block} current={current} setCurrent={setCurrent} setModal={setBlockModal} />}
-                data={TokenData}
-                columns={tokenColumns(myToken, setMyToken)}
+                columns={tokenColumns()}
+                api={API.MARKET_TOKEN}
             />
             <Modal
                 style={{position: 'relative', left: '150px'}}
