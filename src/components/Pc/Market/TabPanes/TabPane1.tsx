@@ -61,28 +61,26 @@ export const tokenColumns = () => {
                                     }
                                     return e
                                 }))
-                                // const res = await request({
-                                //     url: API.MARKET_SELF_TOKEN,
-                                //     method: 'POST',
-                                //     params: {
-                                //         page: currentPage,
-                                //         size: 10,
-                                //         order,
-                                //         desc,
-                                //     },
-                                //     timeout: 5000,
-                                //     authorization: false,
-                                // })
                             }}
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
+                                style={{
+                                    width: '15px',
+                                    height: '15px',
+                                    objectFit: 'cover',
+                                }}
                                 src={record.starred ? starSelected.src : star.src}
-                                width={15}
-                                alt=""
                             />
                         </div>
-                        <Image width={28} height={28} src={record.icon} className="shrink-0 ml-4 self-center" />
+                        <Image
+                            src={record.icon}
+                            className="shrink-0 ml-4 self-center"
+                            style={{
+                                width: '28px',
+                                height: '28px',
+                            }}
+                        />
                         <div className="font-[600] self-center ml-2">{text}</div>
                         <div className="text-[#656277] font-[500] text-[14px] self-center ml-2">{record.name}</div>
                     </div>
@@ -231,11 +229,21 @@ export const nftColumns = () => {
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src={record.starred ? starSelected.src : star.src}
-                                    width={16}
-                                    height={16}
+                                    style={{
+                                        width: '16px',
+                                        height: '16px',
+                                        objectFit: 'cover',
+                                    }}
                                 />
                             </div>
-                            <Image width={34} height={34} src={record.icon} className="shrink-0 ml-4 self-center" />
+                            <Image
+                                src={record.icon}
+                                className="shrink-0 ml-4 self-center"
+                                style={{
+                                    width: '34px',
+                                    height: '34px',
+                                }}
+                            />
                             <div className="font-[600] self-center ml-2">{text}</div>
                         </div>
                     ),
