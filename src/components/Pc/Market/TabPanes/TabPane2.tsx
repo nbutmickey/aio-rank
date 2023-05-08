@@ -1,5 +1,5 @@
 // TOKEN
-import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
+import React, {FC, useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Modal} from '@douyinfe/semi-ui';
 import {IconHome, IconPlus, IconSmallTriangleLeft, IconSmallTriangleRight} from '@douyinfe/semi-icons';
 import {DndContext} from '@dnd-kit/core';
@@ -65,6 +65,7 @@ export const BlockList: FC<BlockProps> = ({data, current, setCurrent, setModal})
     const resize = useCallback(() => {
         if (scrollRef.current === null) return;
         const { clientWidth = 0, scrollWidth = 0, scrollLeft = 0 } = scrollRef.current ?? {};
+        if (scrollWidth === 0) return;
 
         const scrW = clientWidth + scrollLeft;
 
@@ -91,19 +92,19 @@ export const BlockList: FC<BlockProps> = ({data, current, setCurrent, setModal})
     }, [scrollRef.current]);
 
     useEffect(() => {
-        setTimeout(() => {
-            resize();
-        }, 100);
-
         window.addEventListener('resize', resize)
 
         return () => window.removeEventListener('resize', resize)
     }, [scrollRef.current]);
 
+    useLayoutEffect(() => {
+        resize();
+    }, [scrollRef.current])
+
     return (
         <div className="flex flex-row items-center">
             <div
-                className="rounded-3xl border-[1px] border-[#E9ECF2] px-2 flex items-center justify-center h-[32px] mr-2"
+                className={`rounded-3xl border-[1px] border-[#E9ECF2] px-2 flex items-center justify-center h-[32px] mr-2 ${onLeft ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                 onClick={() => {
                     if (onLeft) return;
                     const { scrollLeft } = scrollRef.current ?? {};
@@ -139,7 +140,7 @@ export const BlockList: FC<BlockProps> = ({data, current, setCurrent, setModal})
                 ))}
             </div>
             <div
-                className="rounded-3xl border-[1px] border-[#E9ECF2] px-2 flex items-center justify-center h-[32px] ml-2"
+                className={`rounded-3xl border-[1px] border-[#E9ECF2] px-2 flex items-center justify-center h-[32px] ml-2 ${onRight ? ' cursor-not-allowed' : 'cursor-pointer'}`}
                 onClick={() => {
                     if (onRight) return;
                     const { scrollLeft } = scrollRef.current ?? {};

@@ -100,6 +100,7 @@ const MarketIndex = () => {
         <BillContext.Provider value={billType}>
             <div className="py-7 px-8 h-full w-full">
                 <Tabs
+                    lazyRender
                     defaultActiveKey="1"
                     activeKey={currentKey}
                     onChange={e => {setCurrentKey(e);}}
