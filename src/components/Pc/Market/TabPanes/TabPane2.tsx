@@ -91,7 +91,9 @@ export const BlockList: FC<BlockProps> = ({data, current, setCurrent, setModal})
     }, [scrollRef.current]);
 
     useEffect(() => {
-        resize();
+        setTimeout(() => {
+            resize();
+        }, 100);
 
         window.addEventListener('resize', resize)
 

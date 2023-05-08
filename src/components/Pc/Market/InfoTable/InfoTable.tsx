@@ -110,6 +110,7 @@ const InfoTable: FC<InfoTableProps> = ({title, columns, api, needPagination = tr
                     loading={loading}
                     style={{
                         '--semi-color-shadow': 'translate',
+                        '--semi-color-border': 'translate',
                     }}
                     pagination={needPagination && {
                         currentPage,

@@ -154,7 +154,7 @@ export const tokenColumns = () => {
                                 <div className="flex flex-col">
                                     <div className="font-[600] self-center ml-2">{text}</div>
                                     {/* eslint-disable-next-line max-len */}
-                                    <div className="text-[12px] text-[#656277]">{`$${record.priceUS}`}</div>
+                                    <div className="text-[12px] text-[#656277]">{billType === 'USD' ? null : `$${record.priceUS}`}</div>
                                 </div>
                             </div>
                         )}
@@ -174,7 +174,7 @@ export const tokenColumns = () => {
                                 <div className="flex flex-col">
                                     <div className="font-[600] self-center ml-2">{text}</div>
                                     {/* eslint-disable-next-line max-len */}
-                                    <div className="text-[12px] text-[#656277]">{`$${record.priceUS}`}</div>
+                                    <div className="text-[12px] text-[#656277]">{billType === 'USD' ? null : `$${record.priceUS}`}</div>
                                 </div>
                             </div>
                         )}
@@ -309,7 +309,7 @@ export const nftColumns = () => {
                                 <Image src={record.tokenIcon} className="h-[1rem] w-[1rem] self-center" />
                                 <div className="font-[600] self-center ml-2">{text}</div>
                             </div>
-                            <div className="font-[600]">{`$${record.volumeFM}`}</div>
+                            <div className="text-[12px] text-[#656277]">{`$${record.volumeFM}`}</div>
                         </div>
                     ),
                 },
@@ -325,7 +325,7 @@ export const nftColumns = () => {
                                 <Image src={record.tokenIcon} className="h-[1rem] w-[1rem] self-center" />
                                 <div className="font-[600] self-center ml-2">{text}</div>
                             </div>
-                            <div className="font-[600]">{`$${record.marketCapFM}`}</div>
+                            <div className="text-[12px] text-[#656277]">{`$${record.marketCapFM}`}</div>
                         </div>
                     ),
                 },
